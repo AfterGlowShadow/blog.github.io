@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog.github.io/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog.github.io/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog.github.io/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog.github.io/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog.github.io/css/main.css">
+
+
+<link rel="stylesheet" href="/blog.github.io/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/blog.github.io/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"afterglowshadow.github.io","root":"/blog.github.io/","scheme":"Mist","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="vim文件内常用跳转命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim跳转命令">
+<meta property="og:url" content="http://afterglowshadow.github.io/blog.github.io/2021/07/23/vimjumpcommand/index.html">
+<meta property="og:site_name" content="余晖残影">
+<meta property="og:description" content="vim文件内常用跳转命令">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-23T11:25:48.418Z">
+<meta property="article:modified_time" content="2021-07-23T11:25:48.418Z">
+<meta property="article:author" content="Shadow">
+<meta property="article:tag" content="vim">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://afterglowshadow.github.io/blog.github.io/2021/07/23/vimjumpcommand/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vim跳转命令 | 余晖残影</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/blog.github.io/atom.xml" title="余晖残影" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog.github.io/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">余晖残影</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">秋风扫落叶 余晖映残影</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84%E7%A7%BB%E5%8A%A8-%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3"><span class="nav-number">1.</span> <span class="nav-text">常规移动[上下左右]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%B9%B6%E8%B7%B3%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">查找并跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim%E6%96%87%E4%BB%B6%E8%B7%B3%E8%BD%AC"><span class="nav-number">3.</span> <span class="nav-text">vim文件跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">其他方法</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shadow"
+      src="/blog.github.io/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Shadow</p>
+  <div class="site-description" itemprop="description">秋风扫落叶 余晖映残影</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog.github.io/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog.github.io/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog.github.io/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AfterGlowShadow" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AfterGlowShadow" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:AfterGlowShadow@gmail.com" title="E-Mail → mailto:AfterGlowShadow@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/AfterGlowShadow" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://afterglowshadow.github.io/blog.github.io/2021/07/23/vimjumpcommand/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.github.io/images/avatar.gif">
+      <meta itemprop="name" content="Shadow">
+      <meta itemprop="description" content="秋风扫落叶 余晖映残影">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="余晖残影">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vim跳转命令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-23 19:25:48" itemprop="dateCreated datePublished" datetime="2021-07-23T19:25:48+08:00">2021-07-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.github.io/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.github.io/categories/%E5%B7%A5%E5%85%B7/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">vim文件内常用跳转命令</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="常规移动-上下左右"><a href="#常规移动-上下左右" class="headerlink" title="常规移动[上下左右]"></a>常规移动[上下左右]</h2><p>hjkl 这是代替箭头键功能的<br>H M L 跳到屏幕的顶上 中间 下方</p>
+<p>w 跳到下一个单词的开始<br>e 跳到单词的结束<br>b 向后跳</p>
+<p>gg 跳到文件的开始<br>G 跳到文件的结束<br>10gg 或10G 跳到第10行</p>
+<p>另外看文件时 除了pageup pagedown外还有其它的快速键<br>如CTRL-F 向前一页 CTRL-B 向后一页</p>
+<p>CTRL-D 向下半页 CTRL-U 向上半页我觉得更实用 这样看文章时就不会跳转出错<br>另外还有<br>CTRL-E 向下一行<br>CTRL-Y 向上一行</p>
+<p>^ 行首<br>$行尾<br>0 第一个字符</p>
+<p>另外还有ctrl-t ctrl-i ctrl-]<br>如果已经使用了ctags 或是cscope创建索引文件的话 那看代码时很是方便[ctags需要单独设置,在使用前必须检索一遍才能用]</p>
+<p>跳转到函数、变量定义处：[ctags]<br>[+ctrl+i 跳转到函数、变量和#define<br>[+ctrl+d 跳转到#define处<br>ctrl+i 向前跳到前几次光标位置<br>ctrl+o 向后跳到后几次光标位置</p>
+<p>函数体跳转：<br>[[<br>]]<br>[]<br>][<br>{}</p>
+<details>
+  <summary>函数体示例</summary>
+    如何选中括号中的内容 进行：
+
+<pre><code>将光标移至括号内，按shift+v进入行选模式，然后
+
+i｛ － 选小括号中内容，不包括小括号
+
+a｛ － 选小括号中内容，包括小括号
+
+ib － 选中括号中内容，不包括括号
+
+ab － 选中括号中内容，包括括号
+
+i｛ － 选大括号中内容，不包括大括号
+
+a｛ － 选大括号中内容，包括大括号</code></pre>
+</details>
+
+<p>下面还有些相关的tips，未全部验证：<br>vi{ 选中{}中间的内容,不包括{}<br>va{ 选中{}中间内容，包括{}<br>vi( 选中()中间内容<br>vi&lt; 选中&lt;&gt;中间内容<br>vi[ 选中[]中间内容<br>vit 选中中间的内容<br>vi” 选中””中间内容<br>vi’ 选中”中间的内容<br>vis 选中一个句子<br>vib 选中一个block<br>viw选中一个单词<br>vip 选中一个段落</p>
+<p>gg光标定位到第一行开头，G定位到最后一行开头<br>H光标跳到当前窗口显示文本的第一行<br>M光标跳到当前窗口显示文本的中间一行<br>L光标跳到当前窗口显示文本的最后一行<br>g*查找包含当前单词的所有单词(*只查找与当前单词精确匹配的单词)，<br>-d光标下跳半屏，文本上滚半屏<br>-u光标上跳半屏，文本下滚半屏<br>-e文本向上滚动一行<br>zz屏幕滚动使得当前行成为屏幕的中间一行</p>
+<ul>
+<li>跳到下一个不同之处<br>:]c</li>
+</ul>
+<p>*跳到上一个不同之处<br>:[c</p>
+<p>*不论何种情况下－o都可以上一次跳转的地方</p>
+<p>*查看变量和函数的申明<br>[i</p>
+<h2 id="查找并跳转"><a href="#查找并跳转" class="headerlink" title="查找并跳转"></a>查找并跳转</h2><p>ta 跳到下一个a 前面<br>fa 跳到下一个a<br>大写的意思相反</p>
+<p>另外上面也作为vim其它命令的定位符 如删除d<br>dt)<br>一直删除到这行的)</p>
+<p>另外还有%(跳到文件的%多少) 和|(跳到第几列) 不过我很少用</p>
+<h2 id="vim文件跳转"><a href="#vim文件跳转" class="headerlink" title="vim文件跳转"></a>vim文件跳转</h2><p>如果使用vim 打开了多个文件 ，如vim file1 file2 … fileN<br>可以通过<br>:n 或 :prev来跳转 到前一个或者后一个文件<br>还可以通过<br>:first或:last来跳转到第一个和最后一个文件</p>
+<p>如果你只打开一个文件，如vim file1<br>然后在使用过程中，通过<br>:e file2编辑了第二个文件，这时, :prev是不起作用的<br>可以用<br>:e#返回上一个编辑的文件</p>
+<p>无论哪两种方式都可以用<br>:bN跳转到打开的第N个文件<br>如:b1跳转到第一个打开的文件</p>
+<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><p>在normal模式下光标停在某个字符上ga可以查看该字符的ascii码<br>#复制删除粘贴的操作：按V（shift+v），进入可视模式，jk上下选择需要的行，然后按<br>y 复制<br>d 删除<br>x 剪切<br>p 粘贴<br>可视模式很好用，例如想把两行的所有单词变成小写，按V然后按j或k选中这两行，按gu即可<br>#折叠或展开（在折叠的那一行左右移动光标也可展开折叠）<br>#删除光标所在行所处的范围的折叠<br>#展开折叠:zo<br>#折叠:zc<br>#不在单词中间断行。 设置了这个选项后， 如果一行文字非常长， 无法在一行内显示完的话，<br>它会在单词与单词间的空白处断开， 尽量不会把一个单词分成两截放在两个不同的行里。<br>set lbr<br>#sw是shiftwidth的缩写，表缩进列数<br>fx把光标移动到该行的下个x字符上，这个x也可以是一个汉字，;重复fx操作。Fx把光标移动到该行的上一个x字符上。</p>
+<p>normal模式下按J删除此行末尾的换行符,从而合并两行<br>:ab myname william_djj<br>以后再编辑时键入myname，然后空格或回车myname串就会被william_djj代替<br>:r !date<br>在当前位置插入系统时间（linux下的date命令），同理当前位置插入某文件的内容就是<br>:r filename<br>:set ignorecase<br>查找时取消case sensitive<br>:set noignorecase<br>查找时case sensitive<br>############ 使用tags ###################<br>以下命令递归当前目录下的所有文件创建tags文件<br>ctags -R .<br>vim打开当前目录下的任意一文件，命令模式下键入下面语句以指定刚才创建的tags的位置，以后就可以在不同文件间查阅函数<br>set tags=..\tags<br>#分割窗口显示当前函数的定义<br>-w ]<br>##########################################<br>如果插件目录下有echofunc.vim，用以下命令生成tags，以后编辑代码函数名后打“（“时有参数提示。<br>$ ctags -R –fields=+lS .<br>:Tlist打开左边一个taglist的窗口，显示symbols。要注意的是在windows下如果tags文件路径中有空格或中文会报找不到tags文件的错误,<br>+w+w 或者+w+left/right 窗口切换<br>+] 进入光标所指的symbol的定义（如果用鼠标也是+鼠标左键，跟SI的用法一样）<br>+t 返回第一个用+t 跳转位置,注意+o是跳回上一个视图，而+t是跳回上一次按+]的位置<br>#以下命令分裂出一个窗口显示定义处<br>ptag 函数名<br>#以下命令关闭刚才打开的分裂窗口<br>pclose</p>
+<p>#垂直分裂窗口打开一文件<br>vsplit 文件名</p>
+<p>#水平分裂窗口打开一文件<br>split 文件名<br>变量名写成\name表示匹配模式<br>停在某个括号上按%，跳到匹配的括号处，#if跳到匹配的#else或#endif处<br>set fdm=syntax折叠函数体<br>双击]往后逐个函数跳读，双击[往前逐个函数跳读</p>
+<p>#解决乱码<br>set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1</p>
+<p>#在vim下对比两个文件,原来打开了fnpro.c,现在和fnpro.c.bak对比</p>
+<p>#垂直分割<br>:vert diffsplit fnpro.c.bak</p>
+<p>#水平分割<br>:diffsplit fnpro.c.bak</p>
+<p>#重新对文件代码进行缩进<br>gg=G</p>
+<p>. 相对行号<br>:set relativenumber</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>余晖残影
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://afterglowshadow.github.io/blog.github.io/2021/07/23/vimjumpcommand/" title="vim跳转命令">http://afterglowshadow.github.io/blog.github.io/2021/07/23/vimjumpcommand/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog.github.io/tags/vim/" rel="tag"># vim</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog.github.io/2021/07/23/archapp-md/" rel="prev" title="archapp.md">
+      <i class="fa fa-chevron-left"></i> archapp.md
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog.github.io/2021/07/23/phpnote/" rel="next" title="php常用代码段">
+      php常用代码段 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shadow</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog.github.io/lib/anime.min.js"></script>
+
+<script src="/blog.github.io/js/utils.js"></script>
+
+<script src="/blog.github.io/js/motion.js"></script>
+
+
+<script src="/blog.github.io/js/schemes/muse.js"></script>
+
+
+<script src="/blog.github.io/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/blog.github.io/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
